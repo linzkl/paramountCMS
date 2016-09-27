@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+      
+    <http auto-config="true" >
+        <intercept-url pattern="/login.jsp" access="permitAll" />
+        <intercept-url pattern="/assets" access="permitAll" />
+        <intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
+        <form-login  login-page="/login.jsp"
+                     authentication-failure-url="/login.jsp?error=1" 
+                     always-use-default-target="true"/>
+        <logout invalidate-session="true"/>
+        <session-management>
+        	<concurrency-control max-sessions="10" session-registry-alias="sessionRegistery"/>
+        </session-management>
+        <access-denied-handler error-page="/getAccessDenied.do"/>
+    </http>
+  
+    <authentication-manager >
+    	<!-- <authentication-provider>
+    		<jdbc-user-service data-source-ref="dataSource"
+    			users-by-username-query=""
+    			authorities-by-username-query=""/>
+    	</authentication-provider> -->
+        <authentication-provider>
+        	<user-service>
+        		<user name="test" password="test" authorities="ADMIN"/>
+        	</user-service>
+        </authentication-provider>
+    </authentication-manager>
+      
+	<beans:bean id="bcEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>     
+</beans:beans>
