@@ -8,34 +8,43 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-		
+	
+	<import resource="spring-security.xml"/>
+	<import resource="tiles.xml"/>
+	
 	<context:annotation-config/>
 	
-	<context:component-scan base-package="com.tedpros.cms"></context:component-scan>
+	<context:component-scan base-package="com.tedpros.cms, com.tedpros.cms.service"></context:component-scan>
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-		<property name="url" value="jdbc:sqlserver://cms.cp18d81o9ztj.us-west-2.rds.amazonaws.com:1433/cms" />
+		<property name="url" value="jdbc:sqlserver://cms.cp18d81o9ztj.us-west-2.rds.amazonaws.com;databaseName=cms" />
 		<property name="username" value="paramount" />
-		<property name="password" value="proteds3" />
+		<property name="password" value="tedpros3" />
 	</bean>
 	
-	<bean id="SessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</prop>
                 <prop key="hibernate.connection.autocommit">true</prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.use_sql_comments">false</prop>
             </props>
-        </property>       
+        </property> 
+        <property name="annotatedClasses">
+	        <list>
+	            <value>com.tedpros.cms.entity.CodeValueT</value>
+	            <value>com.tedpros.cms.entity.DomainEntity</value>
+	        </list>
+	    </property>
     </bean>	
     
     <bean id="cmsDAO" class="com.tedpros.cms.dao.GenericDAO">
-		<property name="sessionFactory" ref="SessionFactory" />
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 </beans>

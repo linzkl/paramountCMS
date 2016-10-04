@@ -3,7 +3,7 @@
 
 <html>
 	<head>
-		<title>Phantom by HTML5 UP</title>
+		<title>Course Management</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="<c:url value="/assets/js/ie/html5shiv.js"/>"></script><![endif]-->
@@ -35,10 +35,15 @@
 								<div class="2u 12u(small)">
 									<section class="tiles">
 										<form action="login" method="post">
-											<label for="username"> Username: </label>
+											<label for="username">Username:</label>
 											<input type="text" name="username" id="username"/>
-											<label for="password">Password: </label>
+											<label for="password">Password:</label>
 											<input type="password" name="password" id="password"/>
+											<div style="color: red; font-size: .8em;">
+												<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION }">
+													Invalid Username or Password.
+												</c:if>
+											</div>
 											<br />
 											<input type="submit" value="Login" />
 										</form>

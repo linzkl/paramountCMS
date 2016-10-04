@@ -11,4 +11,15 @@
     <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
   </definition>
   
+  <definition name="login.home" extends="initialTemplate">
+    <put-attribute name="title" value="Home" type="String"/>
+    <put-attribute name="body" value="/WEB-INF/jsp/home/home.jsp" />
+  </definition>
+  
+  <!-- CodeValue Module -->
+  <definition name="codeValue.add" extends="initialTemplate">
+    <put-attribute name="title" value="Home" type="String"/>
+    <put-attribute name="body" value="/WEB-INF/jsp/admin/codeValue/add.jsp" />
+  </definition>
+  <!-- CodeValue Module -->
 </tiles-definitions>

@@ -10,9 +10,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.sun.org.apache.xerces.internal.impl.dtd.models.CMStateSet;
-import com.tedpros.cms.dao.CmsDAOImpl;
-
 @MappedSuperclass
 public abstract class DomainEntity implements Serializable {
 
@@ -71,7 +68,6 @@ public abstract class DomainEntity implements Serializable {
 		this.rowLastChangedDateTime = rowLastChangedDateTime;
 	}
 
-	@PrePersist
 	public void prePersist(){
 		Date currentDate = new Date();
 		setRowCreatedBy("ADMIN");
@@ -80,7 +76,6 @@ public abstract class DomainEntity implements Serializable {
 		setRowLastChangedDateTime(currentDate);
 	}
 	
-	@PreUpdate
 	public void preUpdate(){
 		Date currentDate = new Date();
 		setRowLastChangedBy("ADMIN");

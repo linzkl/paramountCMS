@@ -6,7 +6,7 @@
    <session-factory>
 	   <property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
 	   <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-	   <property name="hibernate.connection.url">jdbc:sqlserver://cms.cp18d81o9ztj.us-west-2.rds.amazonaws.com:1433</property>
+	   <property name="hibernate.connection.url">jdbc:sqlserver://cms.cp18d81o9ztj.us-west-2.rds.amazonaws.com:1433/cms</property>
 	   <property name="hibernate.connection.username">paramount</property>
 	   <property name="hibernate.connection.password">proteds3</property>
 	</session-factory>

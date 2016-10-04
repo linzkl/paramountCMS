@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
-      
-    <http auto-config="true" >
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="
+      http://www.springframework.org/schema/security 
+      http://www.springframework.org/schema/security/spring-security-4.1.xsd
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+ 
+   <http auto-config="false" >
+   		<csrf disabled="true"/>
         <intercept-url pattern="/login.jsp" access="permitAll" />
-        <intercept-url pattern="/assets" access="permitAll" />
+        <intercept-url pattern="/assets/**" access="permitAll" />
         <intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/**" access="authenticated" />
+        <!-- <intercept-url pattern="/**" access="permitAll" /> --> 
         <intercept-url pattern="/dba**" access="hasRole('ADMIN') and hasRole('DBA')" />
         <form-login  login-page="/login.jsp"
+        				username-parameter="username"
+        				password-parameter="password"
+        			 default-target-url="/login/postLogin.do"
                      authentication-failure-url="/login.jsp?error=1" 
                      always-use-default-target="true"/>
         <logout invalidate-session="true"/>

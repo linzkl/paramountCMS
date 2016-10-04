@@ -8,27 +8,17 @@ import java.util.Map.Entry;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.tedpros.cms.entity.DomainEntity;
 
 public abstract class CmsDAOImpl implements CmsDAO {
 
-	private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-    
-    public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T persist(T entity) {
     	DomainEntity mergeEntity = (DomainEntity) entity;
+    	mergeEntity.prePersist();
 		Session session = getOpenSession();
 		Transaction tx = session.beginTransaction();
 		session.persist(mergeEntity);
@@ -41,6 +31,7 @@ public abstract class CmsDAOImpl implements CmsDAO {
 	@Override
 	public <T> T update(T entity) {
 		DomainEntity mergeEntity = (DomainEntity) entity;
+		mergeEntity.preUpdate();
 		Session session = getOpenSession();
 		Transaction tx = session.beginTransaction();
 		mergeEntity = (DomainEntity) session.merge(mergeEntity);
@@ -92,6 +83,6 @@ public abstract class CmsDAOImpl implements CmsDAO {
 	}
 	
 	public Session getOpenSession(){
-		return this.sessionFactory.openSession();
+		return GenericDAO.getSessionFactory().openSession();
 	}
 }

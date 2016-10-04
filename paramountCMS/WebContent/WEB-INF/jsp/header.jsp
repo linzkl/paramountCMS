@@ -1,9 +1,10 @@
-<header id="header">
-	<div class="inner">
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<header id="header" class="container 125%">
+	<div >
 
 		<!-- Logo -->
-			<a href="index.html" class="logo">
-				<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Phantom</span>
+			<a href="#" class="logo">
+				<span class="symbol"><img src="<c:url value="/assets/images/logo.png"/>" alt="" /></span><span class="title">Course Management System</span>
 			</a>
 
 		<!-- Nav -->

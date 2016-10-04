@@ -1,15 +1,18 @@
 package com.tedpros.cms.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="CODE_VALUE_T")
+@Table(name="CODE_VALUE_T",schema="CMSWEB")
 public class CodeValueT extends DomainEntity{
 
 	/**
@@ -17,7 +20,7 @@ public class CodeValueT extends DomainEntity{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "OBJECTID", unique=true, nullable=false, updatable=false, precision=18)
 	private Long objectid;
 
@@ -35,11 +38,11 @@ public class CodeValueT extends DomainEntity{
    
    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "EFFECTIVE_DATETIME")
-   private String effectiveDateTime;  
+   private Date effectiveDateTime;  
    
    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "EFFECTIVE_THRU_DATETIME")
-   private String effectiveThruDateTime;
+   private Date effectiveThruDateTime;
 
 	@Override
 	public Long getObjectid() {
@@ -82,21 +85,20 @@ public class CodeValueT extends DomainEntity{
 	public void setLongDescription(String longDescription) {
 		this.longDescription = longDescription;
 	}
-	
-	public String getEffectiveDateTime() {
+
+	public Date getEffectiveDateTime() {
 		return effectiveDateTime;
 	}
-	
-	public void setEffectiveDateTime(String effectiveDateTime) {
+
+	public void setEffectiveDateTime(Date effectiveDateTime) {
 		this.effectiveDateTime = effectiveDateTime;
 	}
-	
-	public String getEffectiveThruDateTime() {
+
+	public Date getEffectiveThruDateTime() {
 		return effectiveThruDateTime;
 	}
-	
-	public void setEffectiveThruDateTime(String effectiveThruDateTime) {
+
+	public void setEffectiveThruDateTime(Date effectiveThruDateTime) {
 		this.effectiveThruDateTime = effectiveThruDateTime;
 	}
-
 }
