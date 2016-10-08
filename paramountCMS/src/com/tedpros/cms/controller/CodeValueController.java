@@ -1,5 +1,7 @@
 package com.tedpros.cms.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,13 @@ public class CodeValueController extends TopController{
 	@Autowired
 	private CodeValueService codeValueService;
 
+	@RequestMapping(value = "/getList.do", method=RequestMethod.GET)
+	public String getList(WebRequest request){
+		List<CodeValueT> codeValueList = codeValueService.findAll();
+		request.setAttribute("codeValueList", codeValueList, WebRequest.SCOPE_REQUEST);
+		return "codeValue.list";
+	}
+	
 	@RequestMapping(value = "/getAdd.do", method=RequestMethod.GET)
 	public String getAdd(WebRequest request){
 		return "codeValue.add";

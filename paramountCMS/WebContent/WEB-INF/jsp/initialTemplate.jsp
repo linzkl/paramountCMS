@@ -15,6 +15,16 @@
 		<link rel="stylesheet" href="<c:url value="/assets/css/main.css"/>" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="<c:url value="/assets/css/ie9.css"/>" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="<c:url value="/assets/css/ie8.css"/>" /><![endif]-->
+		<link rel="stylesheet" href="<c:url value="/assets/css/datatables.min.css"/>" />
+		
+		<!-- Scripts -->
+			<script src="<c:url value="/assets/js/jquery.min.js"/>"></script>
+			<script src="<c:url value="/assets/js/datatables.min.js"/>"></script>
+			<script src="<c:url value="/assets/js/skel.min.js"/>"></script>
+			<script src="<c:url value="/assets/js/util.js"/>"></script>
+			<!--[if lte IE 8]><script src="<c:url value="/assets/js/ie/respond.min.js"/>"></script><![endif]-->
+			<script src="<c:url value="/assets/js/main.js"/>"></script>
+			
 	</head>
 	<body>
 		<!-- Wrapper -->
@@ -26,6 +36,9 @@
 				<!-- Main -->
 				<div id="main">
 					<div class="inner">
+						<header>
+							<h2><tiles:insertAttribute name="title" /></h2>
+						</header>
 						<tiles:insertAttribute name="body" />
 					</div>
 				</div>
@@ -33,13 +46,6 @@
 				<!-- Footer -->
 				<tiles:insertAttribute name="footer" />
 			</div>
-
-		<!-- Scripts -->
-			<script src="<c:url value="/assets/js/jquery.min.js"/>"></script>
-			<script src="<c:url value="/assets/js/skel.min.js"/>"></script>
-			<script src="<c:url value="/assets/js/util.js"/>"></script>
-			<!--[if lte IE 8]><script src="<c:url value="/assets/js/ie/respond.min.js"/>"></script><![endif]-->
-			<script src="<c:url value="/assets/js/main.js"/>"></script>
 
 	</body>
 </html>

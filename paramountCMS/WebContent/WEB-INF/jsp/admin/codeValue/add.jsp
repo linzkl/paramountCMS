@@ -1,16 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<header>
-	<h2>Add Code Value</h2>
-</header>
 <section>
 	<form method="post" action="<c:url value="/codeValue/postAdd.do"/>">
 		<div class="field half first">
-			<label for="code">Code:*</label>
-			<input type="text" id="code" name="code"/>
-		</div>
-		<div class="field half">
 			<label for="codeGroup">Code Group:*</label>
 			<input type="text" id="codeGroup" name="codeGroup"/>
+		</div>
+		<div class="field half">
+			<label for="code">Code:*</label>
+			<input type="text" id="code" name="code"/>
 		</div>
 		<div class="field">
 			<label for="sequence">Seq:</label>
@@ -34,6 +31,16 @@
 		</div>
 		<ul class="actions">
 			<li><input type="submit" value="Add" class="special" /></li>
+			<li><input type="button" id="cancel" value="Cancel" class="special" onclick=""/></li>
 		</ul>
 	</form>
 </section>
+<script>
+(function($){
+	$(document).ready(function() {
+		$( "#cancel" ).click(function() {
+			window.location.href='<c:url value="/codeValue/getList.do"/>';
+		});
+	} );
+})(jQuery); 
+</script>

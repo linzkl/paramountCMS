@@ -7,12 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="CODE_VALUE_T",schema="CMSWEB")
+@NamedQueries({
+	@NamedQuery(name="CodeValueT.findAll", query="Select c from CodeValueT c"),
+	@NamedQuery(name="CodeValueT.findByCodeGroup", query="Select c from CodeValueT c WHERE c.codeGroup = :codeGroup")
+})
+
 public class CodeValueT extends DomainEntity{
 
 	/**
