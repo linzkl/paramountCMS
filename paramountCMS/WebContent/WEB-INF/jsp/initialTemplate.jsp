@@ -16,6 +16,7 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="<c:url value="/assets/css/ie9.css"/>" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="<c:url value="/assets/css/ie8.css"/>" /><![endif]-->
 		<link rel="stylesheet" href="<c:url value="/assets/css/datatables.min.css"/>" />
+		<link rel="stylesheet" href="<c:url value="/assets/css/jquery-ui.css"/>" />
 		
 		<!-- Scripts -->
 			<script src="<c:url value="/assets/js/jquery.min.js"/>"></script>
@@ -24,6 +25,8 @@
 			<script src="<c:url value="/assets/js/util.js"/>"></script>
 			<!--[if lte IE 8]><script src="<c:url value="/assets/js/ie/respond.min.js"/>"></script><![endif]-->
 			<script src="<c:url value="/assets/js/main.js"/>"></script>
+			<script src="<c:url value="/assets/js/validate.min.js"/>"></script>
+			<script src="<c:url value="/assets/js/jquery-ui.js"/>"></script>
 			
 	</head>
 	<body>
