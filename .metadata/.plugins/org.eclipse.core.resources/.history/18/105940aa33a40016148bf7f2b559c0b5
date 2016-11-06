@@ -1,0 +1,6 @@
+package com.tedpros.cms.service;
+
+@Service
+public class loginService {
+
+}

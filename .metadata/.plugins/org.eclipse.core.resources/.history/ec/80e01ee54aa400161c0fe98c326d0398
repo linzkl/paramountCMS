@@ -1,0 +1,43 @@
+package com.tedpros.cms.controller;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tedpros.cms.model.Course;
+import com.tedpros.cms.model.CourseSemesterOffer;
+import com.tedpros.cms.model.Faculty;
+import com.tedpros.cms.model.Student;
+import com.tedpros.cms.service.UserDataService;
+
+@RestController
+public class UserDataController extends TopController{
+	
+	@Inject
+	private UserDataService userDataService;
+	
+	@RequestMapping(value = "/cms/data/student/{studentId}",method=RequestMethod.GET,produces={MediaType.APPLICATION_JSON_VALUE})
+	public Student getStudentInfo(@PathVariable String studentId, HttpServletResponse httpServletResponse){
+		return userDataService.retrieveStudentInfo(studentId);
+	}
+
+	@RequestMapping(value = "/cms/data/faculty/{facultyId}",method=RequestMethod.GET,produces={MediaType.APPLICATION_JSON_VALUE})
+	public Faculty getFacultyInfo(@PathVariable String studentId, HttpServletResponse httpServletResponse){
+		return userDataService.retrieveFacultyInfo(studentId);
+	}
+	
+	@RequestMapping(value = "/cms/data/offer/{offerId}",method=RequestMethod.GET,produces={MediaType.APPLICATION_JSON_VALUE})
+	public CourseSemesterOffer getCourseSemesterOfferInfo(@PathVariable String studentId, HttpServletResponse httpServletResponse){
+		return userDataService.retrieveCourseSemesterOfferInfo(studentId);
+	}
+	
+	@RequestMapping(value = "/cms/data/course/{courseId}",method=RequestMethod.GET,produces={MediaType.APPLICATION_JSON_VALUE})
+	public Course getCourseInfo(@PathVariable String studentId, HttpServletResponse httpServletResponse){
+		return userDataService.retrieveCourseInfo(studentId);
+	}
+}

@@ -1,0 +1,18 @@
+package com.tedpros.cms.service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import com.tedpros.cms.model.LoginRequest;
+import com.tedpros.cms.model.LoginResponse;
+
+@Service
+public class UserDataService {
+	
+	public 
+}

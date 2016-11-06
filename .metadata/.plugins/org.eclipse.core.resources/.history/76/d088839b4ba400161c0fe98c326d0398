@@ -1,0 +1,136 @@
+package com.tedpros.cms.service;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.tedpros.cms.model.Course;
+import com.tedpros.cms.model.CourseSemesterOffer;
+import com.tedpros.cms.model.Faculty;
+import com.tedpros.cms.model.Student;
+import com.tedpros.cms.model.StudentCourseScore;
+
+@Service
+public class UserDataService {
+	
+	private static final String ENTRY_DATE = "entry_date";
+	private static final String DATE_FORMAT = "MM/dd/yyyy";
+	private static final String UPDATE_DATE = "update_date";
+	private static final String ENROLLMENT_DATE = "enrollment_date";
+	private static final String REGISTER_DATE = "register_date";
+	private static final String SSN = "ssn";
+	private static final String DATE_OF_BIRTH = "date_of_birth";
+	private static final String GENDER = "gender";
+	private static final String LAST_NAME = "last_name";
+	private static final String MIDDLE_NAME = "middle_name";
+	private static final String FIRST_NAME = "first_name";
+	private static final String PROGRAM_ID = "program_id";
+
+	public Student retrieveStudentInfo(String studentId){
+		Student student = new Student();
+		Map<String, String> studentData = getStudentDataFromDB(studentId);
+		student.setStudentId(studentId);
+		student.setProgramId(studentData.get(PROGRAM_ID));
+		student.setFirstName(studentData.get(FIRST_NAME));
+		student.setMiddleName(studentData.get(MIDDLE_NAME));
+		student.setLastName(studentData.get(LAST_NAME));
+		student.setGender(studentData.get(GENDER));
+		student.setDateOfBirth(convertStringToDate(studentData.get(DATE_OF_BIRTH),DATE_FORMAT));
+		student.setSSN(studentData.get(SSN));
+		student.setRegisterDate(convertStringToDate(studentData.get(REGISTER_DATE),DATE_FORMAT));
+		student.setEnrollmentDate(convertStringToDate(studentData.get(ENROLLMENT_DATE),DATE_FORMAT));
+		student.setUpdateDate(convertStringToDate(studentData.get(UPDATE_DATE),DATE_FORMAT));
+		return student;
+	}
+	
+	public Faculty retrieveFacultyInfo(String facultyId){
+		Faculty faculty = new Faculty();
+		Map<String, String> facultyData = getFacultyDataFromDB(facultyId);
+		faculty.setFacultyId(facultyData.get("faculty_id"));
+		faculty.setFacultyPrefix(facultyData.get("faculty_prefix"));
+		faculty.setFacultyName(facultyData.get("faculty_name"));
+		faculty.setFacultyLocation(facultyData.get("faculty_location"));
+		faculty.setEntryDate(convertStringToDate(facultyData.get(ENTRY_DATE),DATE_FORMAT));
+		faculty.setUpdateDate(convertStringToDate(facultyData.get(UPDATE_DATE),DATE_FORMAT));
+		return faculty;
+	}
+	
+	public CourseSemesterOffer retrieveCourseSemesterOfferInfo(String offerId){
+		CourseSemesterOffer courseSemesterOffer = new CourseSemesterOffer();
+		Map<String, String> courseSemesterOfferData = getCourseSemesterOfferDataFromDB(offerId);
+		courseSemesterOffer.setOfferId(offerId);
+		courseSemesterOffer.setCourseId(courseSemesterOfferData.get("course_id"));
+		courseSemesterOffer.setSemesterId(courseSemesterOfferData.get("semester_id"));
+		courseSemesterOffer.setFacultyId(courseSemesterOfferData.get("faculty_id"));
+		courseSemesterOffer.setCourseTitle(courseSemesterOfferData.get("course_title"));
+		courseSemesterOffer.setCourseDescription(courseSemesterOfferData.get("course_description"));
+		courseSemesterOffer.setCourseCreditHour(courseSemesterOfferData.get("course_credit_hour"));
+		courseSemesterOffer.setCourseTime(courseSemesterOfferData.get("course_time"));
+		courseSemesterOffer.setCourseLocation(courseSemesterOfferData.get("course_location"));
+		courseSemesterOffer.setEntryDate(convertStringToDate(courseSemesterOfferData.get(ENTRY_DATE),DATE_FORMAT));
+		courseSemesterOffer.setUpdateDate(convertStringToDate(courseSemesterOfferData.get(UPDATE_DATE),DATE_FORMAT));
+		return courseSemesterOffer;
+	}
+	
+	public Course retrieveCourseInfo(String courseId){
+		Course course = new Course();
+		Map<String, String> courseData = getCourseSemesterOfferDataFromDB(courseId);
+		course.setCourseId(courseId);
+		course.setCode(courseData.get("code"));
+		course.setTitle(courseData.get("title"));
+		course.setDescription(courseData.get("description"));
+		course.setCreditHours(courseData.get("credit_hours"));
+		course.setEntryDate(convertStringToDate(courseData.get(ENTRY_DATE),DATE_FORMAT));
+		course.setUpdateDate(convertStringToDate(courseData.get(UPDATE_DATE),DATE_FORMAT));
+		return course;
+	}
+	
+	public StudentCourseScore retrieveStudentCourseScoreInfo(String offerId, String studentId){
+		StudentCourseScore studentCourseScore = new StudentCourseScore();
+		Map<String, String> studentCourseScoreData = getStudentCourseScoreDataFromDB(offerId, studentId);
+		studentCourseScore.setScoreId(studentCourseScoreData.get("score_id"));
+		studentCourseScore.setStudentId(studentId);
+		studentCourseScore.setOfferId(offerId);
+		studentCourseScore.setScoreTypeId(scoreTypeId);
+		studentCourseScore.setScoreValue(scoreValue);
+		studentCourseScore.setEntryDate(convertStringToDate(studentCourseScoreData.get(ENTRY_DATE),DATE_FORMAT));
+		studentCourseScore.setUpdateDate(convertStringToDate(studentCourseScoreData.get(UPDATE_DATE),DATE_FORMAT));
+		return studentCourseScore;
+	}
+
+	private Map<String, String> getStudentCourseScoreDataFromDB(String offerId, String studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Map<String, String> getCourseSemesterOfferDataFromDB(String offerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Map<String, String> getFacultyDataFromDB(String facultyId) {
+		// TODO use to retrieve faculty data from db
+		return null;
+	}
+
+	private Map<String, String> getStudentDataFromDB(String studentId) {
+		// TODO use to retrieve student data from db
+		return null;
+	}
+
+	private Date convertStringToDate(String dateStr, String dateFormat) {
+		Date convertedDate = null;
+		try {
+			DateFormat formatter = new SimpleDateFormat(dateFormat); 
+			convertedDate = (Date)formatter.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return convertedDate;
+	}
+}

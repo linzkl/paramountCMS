@@ -1,0 +1,13 @@
+package com.tedpros.cms.service;
+
+import org.springframework.stereotype.Service;
+
+import com.tedpros.cms.model.Student;
+
+@Service
+public class UserDataService {
+	
+	public Student retrieveStudentInfo(String studentId){
+		
+	}
+}

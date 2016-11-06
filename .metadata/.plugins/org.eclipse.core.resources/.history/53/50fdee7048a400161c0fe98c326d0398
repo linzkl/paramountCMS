@@ -1,0 +1,79 @@
+package com.tedpros.cms.service;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.tedpros.cms.model.Faculty;
+import com.tedpros.cms.model.Student;
+
+@Service
+public class UserDataService {
+	
+	private static final String DATE_FORMAT = "MM/dd/yyyy";
+	private static final String UPDATE_DATE = "update_date";
+	private static final String ENROLLMENT_DATE = "enrollment_date";
+	private static final String REGISTER_DATE = "register_date";
+	private static final String SSN = "ssn";
+	private static final String DATE_OF_BIRTH = "date_of_birth";
+	private static final String GENDER = "gender";
+	private static final String LAST_NAME = "last_name";
+	private static final String MIDDLE_NAME = "middle_name";
+	private static final String FIRST_NAME = "first_name";
+	private static final String PROGRAM_ID = "program_id";
+
+	public Student retrieveStudentInfo(String studentId){
+		Student student = new Student();
+		Map<String, String> studentData = getStudentDataFromDB(studentId);
+		student.setStudentId(studentId);
+		student.setProgramId(studentData.get(PROGRAM_ID));
+		student.setFirstName(studentData.get(FIRST_NAME));
+		student.setMiddleName(studentData.get(MIDDLE_NAME));
+		student.setLastName(studentData.get(LAST_NAME));
+		student.setGender(studentData.get(GENDER));
+		student.setDateOfBirth(convertStringToDate(studentData.get(DATE_OF_BIRTH),DATE_FORMAT));
+		student.setSSN(studentData.get(SSN));
+		student.setRegisterDate(convertStringToDate(studentData.get(REGISTER_DATE),DATE_FORMAT));
+		student.setEnrollmentDate(convertStringToDate(studentData.get(ENROLLMENT_DATE),DATE_FORMAT));
+		student.setUpdateDate(convertStringToDate(studentData.get(UPDATE_DATE),DATE_FORMAT));
+		return student;
+	}
+	
+	public Faculty retrieveFacultyInfo(String facultyId){
+		Faculty faculty = new Faculty();
+		Map<String, String> facultyData = getFacultyDataFromDB(facultyId);
+		faculty.setFacultyId(facultyData.get("faculty_id"));
+		faculty.setFacultyPrefix(facultyData.get("faculty_prefix"));
+		faculty.setFacultyName(facultyData.get("faculty_name"));
+		faculty.setFacultyLocation(facultyData.get("faculty_location"));
+		faculty.setEntryDate(convertStringToDate(facultyData.get("entry_date"),DATE_FORMAT));
+		faculty.setUpdateDate(convertStringToDate(facultyData.get(UPDATE_DATE),DATE_FORMAT));
+		return faculty;
+	}
+
+	private Map<String, String> getFacultyDataFromDB(String facultyId) {
+		// TODO use to retrieve faculty data from db
+		return null;
+	}
+
+	private Map<String, String> getStudentDataFromDB(String studentId) {
+		// TODO use to retrieve student data from db
+		return null;
+	}
+
+	private Date convertStringToDate(String dateStr, String dateFormat) {
+		Date convertedDate = null;
+		try {
+			DateFormat formatter = new SimpleDateFormat(dateFormat); 
+			convertedDate = (Date)formatter.parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return convertedDate;
+	}
+}

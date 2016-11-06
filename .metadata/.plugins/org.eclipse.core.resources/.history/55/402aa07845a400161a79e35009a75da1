@@ -1,0 +1,38 @@
+package com.tedpros.cms.service;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.tedpros.cms.model.Student;
+
+@Service
+public class UserDataService {
+	
+	public Student retrieveStudentInfo(String studentId){
+		Student student = new Student();
+		Map<String, String> studentData = getStudentDataFromDB(studentId);
+		student.setStudentId(studentId);
+		student.setProgramId(studentData.get("program_id"));
+		student.setFirstName(studentData.get("first_name"));
+		student.setMiddleName(studentData.get("middle_name"));
+		student.setLastName(studentData.get("last_name"));
+		student.setGender(studentData.get("gender"));
+		
+		String dateFormat = "MM/dd/yyyy";
+		String dateStr = studentData.get("date_of_birth"); 
+		convertStringToDate(dateStr, dateFormat);
+		student.setDateOfBirth(convertStringToDate(studentData.get("date_of_birth"),"MM/dd/yyyy"));
+		
+	}
+
+	private Date convertStringToDate(String dateStr, String dateFormat) throws ParseException {
+		DateFormat formatter = new SimpleDateFormat(dateFormat); 
+		Date convertedDate = (Date)formatter.parse(dateStr);
+		return convertedDate;
+	}
+}
