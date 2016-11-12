@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.tedpros.cms.model.InsertResponse;
 import com.tedpros.cms.model.Course;
 import com.tedpros.cms.model.CourseSemesterOffer;
 import com.tedpros.cms.model.Faculty;
@@ -208,5 +209,30 @@ public class UserDataService {
 			e.printStackTrace();
 		}
 		return convertedDate;
+	}
+
+	public InsertResponse createStudent(Student student) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public InsertResponse createFaculty(Faculty faculty) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public InsertResponse createCourseSemesterOffer(CourseSemesterOffer offer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public InsertResponse enterStudentCourseScore(StudentCourseScore studentCourseScore) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public InsertResponse createCourse(Course course) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
